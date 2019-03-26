@@ -20,7 +20,8 @@ defmodule JBBWeb.Router do
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", JBBWeb do
-  #   pipe_through :api
-  # end
+  scope "/api", JBBWeb do
+    pipe_through :api
+    resources "calendar_events", CalendarEventController
+  end
 end
