@@ -114,7 +114,8 @@ defmodule JBB.Calendar do
 
   """
   def list_calendar_events do
-    Repo.all(CalendarEvent)
+    from(e in CalendarEvent, preload: [:calendar_event_status])
+    |> Repo.all()
   end
 
   @doc """

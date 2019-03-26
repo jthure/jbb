@@ -1,5 +1,6 @@
+import moment from 'moment';
 import types from '../constants';
-import * as api from '../api'
+import * as api from '../api';
 
 export function fetchCalendarEvents() {
   return async (dispatch) => {
@@ -8,15 +9,20 @@ export function fetchCalendarEvents() {
     });
 
     try {
-      const res = await api.fetchCalendarEvents()
+      const res = await api.fetchCalendarEvents();
       dispatch({
         type: types.FETCH_CALENDAR_EVENTS_SUCCESS,
-        payload: res.data.data,
-      })
+        payload: res.data.data.map(event => ({
+          ...event,
+          title: event.name,
+          start: moment(event.start).toDate(),
+          end: moment(event.end).toDate(),
+        })),
+      });
     } catch (error) {
       dispatch({
-        type: types.FETCH_CALENDAR_EVENTS_FAIL
-      })
+        type: types.FETCH_CALENDAR_EVENTS_FAIL,
+      });
     }
   };
 }

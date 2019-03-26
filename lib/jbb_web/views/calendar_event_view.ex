@@ -11,9 +11,12 @@ defmodule JBBWeb.CalendarEventView do
   end
 
   def render("calendar_event.json", %{calendar_event: calendar_event}) do
-    %{id: calendar_event.id,
+    %{
+      id: calendar_event.id,
       name: calendar_event.name,
       start: calendar_event.start,
-      end: calendar_event.end}
+      end: calendar_event.end,
+      status: calendar_event.calendar_event_status.name
+    }
   end
 end

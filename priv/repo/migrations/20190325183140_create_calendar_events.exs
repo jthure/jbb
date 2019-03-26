@@ -6,11 +6,11 @@ defmodule JBB.Repo.Migrations.CreateCalendarEvents do
       add :name, :string
       add :start, :utc_datetime
       add :end, :utc_datetime
-      add :status, references(:calendar_event_statuses, on_delete: :nothing)
+      add :calendar_event_status_id, references(:calendar_event_statuses, on_delete: :nothing)
 
       timestamps()
     end
 
-    create index(:calendar_events, [:status])
+    create index(:calendar_events, [:calendar_event_status_id])
   end
 end

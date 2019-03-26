@@ -13,9 +13,7 @@ const JBBAppBar = () => (
         <IconButton color="inherit" aria-label="Menu">
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" color="inherit">
-                News
-        </Typography>
+        <Typography variant="h6" color="inherit">News</Typography>
         <Button color="inherit">Login</Button>
       </Toolbar>
     </AppBar>
