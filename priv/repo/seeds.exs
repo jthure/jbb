@@ -20,6 +20,6 @@ Calendar.create_calendar_event_status(%{"name" => "Confirmed"})
 
 Calendar.create_calendar_event(%{
   "name" => "Skidresa Sälen",
-  "start" => "2019-03-22",
-  "end" => "2019-03-25"
+  "start" => "2019-03-22T06:00:00+0100",
+  "end" => "2019-03-25T23:00:00+0100"
 })
