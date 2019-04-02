@@ -24,11 +24,14 @@ import configureStore from './store/configure_store';
 import '../css/app.css';
 import AppBar from './components/app_bar';
 import Calendar from './containers/calendar';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
 
 const store = configureStore();
 
 const App = () => (
   <div>
+    <CssBaseline />
     <AppBar />
     <Calendar />
   </div>

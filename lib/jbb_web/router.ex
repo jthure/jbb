@@ -22,6 +22,8 @@ defmodule JBBWeb.Router do
   # Other scopes may use custom stacks.
   scope "/api", JBBWeb do
     pipe_through :api
-    resources "calendar_events", CalendarEventController
+    resources "/calendar_events", CalendarEventController
+    resources "/calendar_event_status", CalendarEventStatusController, only: [:index, :show]
+    resources "/users", UserController
   end
 end

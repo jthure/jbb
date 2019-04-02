@@ -1,11 +1,10 @@
 import { connect } from 'react-redux';
 import React from 'react';
-import BigCalendar from 'react-big-calendar';
-import moment from 'moment';
 import { fetchCalendarEvents } from '../actions/calendar';
-import 'react-big-calendar/lib/css/react-big-calendar.css';
+import { openCalendarEventModal, closeCalendarEventModal } from '../actions/ui';
+import CalendarComponent from '../components/calendar';
+import CalendarEventModal from '../modals/calendar_event';
 
-const localizer = BigCalendar.momentLocalizer(moment);
 
 class Calendar extends React.Component {
   componentWillMount() {
@@ -13,17 +12,18 @@ class Calendar extends React.Component {
   }
 
   render() {
-    const { calendarEvents } = this.props;
+    const {
+      calendarEvents, calendarEventModalOpen, openCalendarEventModal, closeCalendarEventModal,
+    } = this.props;
     return (
       <div>
-        <BigCalendar
-          localizer={localizer}
-          events={calendarEvents}
-          startAccessor="start"
-          endAccessor="end"
-          defaultDate={new Date()}
-          defaultView="month"
-          style={{ height: '70vh' }}
+        <CalendarComponent
+          calendarEvents={calendarEvents}
+          openCalendarModal={openCalendarEventModal}
+        />
+        <CalendarEventModal
+          open={calendarEventModalOpen}
+          closeModal={closeCalendarEventModal}
         />
       </div>
     );
@@ -32,10 +32,13 @@ class Calendar extends React.Component {
 
 const mapStateToProps = state => ({
   calendarEvents: state.calendar.calendarEvents,
+  calendarEventModalOpen: state.ui.calendarEventModalOpen,
 });
 
 const actionCreators = {
   fetchCalendarEvents,
+  openCalendarEventModal,
+  closeCalendarEventModal,
 };
 
 export default connect(mapStateToProps, actionCreators)(Calendar);
