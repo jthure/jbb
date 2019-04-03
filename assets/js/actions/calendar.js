@@ -9,9 +9,10 @@ export const fetchCalendarEvents = () => async (dispatch) => {
 
   try {
     const res = await api.fetchCalendarEvents();
+    const { data } = res.data;
     dispatch({
       type: types.FETCH_CALENDAR_EVENTS_SUCCESS,
-      payload: res.data.data.map(event => ({
+      payload: data.map(event => ({
         ...event,
         title: event.name,
         start: moment(event.start).toDate(),
@@ -21,6 +22,26 @@ export const fetchCalendarEvents = () => async (dispatch) => {
   } catch (error) {
     dispatch({
       type: types.FETCH_CALENDAR_EVENTS_FAIL,
+    });
+  }
+};
+
+export const saveCalendarEvent = event => async (dispatch) => {
+  dispatch({
+    type: types.SAVE_CALENDAR_EVENT,
+  });
+  try {
+    console.log(event);
+    const res = await api.saveCalendarEvent(event);
+    const { data } = res.data;
+    data.title = data.name;
+    dispatch({
+      type: types.SAVE_CALENDAR_EVENT_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    dispatch({
+      type: types.SAVE_CALENDAR_EVENT_FAIL,
     });
   }
 };

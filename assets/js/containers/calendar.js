@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import React from 'react';
-import { fetchCalendarEvents } from '../actions/calendar';
+import { fetchCalendarEvents, saveCalendarEvent } from '../actions/calendar';
 import { openCalendarEventModal, closeCalendarEventModal } from '../actions/ui';
 import CalendarComponent from '../components/calendar';
 import CalendarEventModal from '../modals/calendar_event';
@@ -13,7 +13,8 @@ class Calendar extends React.Component {
 
   render() {
     const {
-      calendarEvents, calendarEventModalOpen, openCalendarEventModal, closeCalendarEventModal,
+      calendarEvents, calendarEventModalOpen, openCalendarEventModal,
+      closeCalendarEventModal, saveCalendarEvent,
     } = this.props;
     return (
       <div>
@@ -24,6 +25,7 @@ class Calendar extends React.Component {
         <CalendarEventModal
           open={calendarEventModalOpen}
           closeModal={closeCalendarEventModal}
+          saveCalendarEvent={saveCalendarEvent}
         />
       </div>
     );
@@ -37,6 +39,7 @@ const mapStateToProps = state => ({
 
 const actionCreators = {
   fetchCalendarEvents,
+  saveCalendarEvent,
   openCalendarEventModal,
   closeCalendarEventModal,
 };

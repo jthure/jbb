@@ -1,3 +1,4 @@
+import * as R from 'ramda';
 import types from '../constants';
 
 const initialState = {
@@ -21,7 +22,18 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-      }
+      };
+    case types.SAVE_CALENDAR_EVENT:
+      return {
+        ...state,
+        loading: true,
+      };
+    case types.SAVE_CALENDAR_EVENT_SUCCESS:
+      return {
+        ...state,
+        calendarEvents: R.uniqBy(e => e.id)([...state.calendarEvents, action.payload]),
+        loading: false,
+      };
     default:
       return state;
   }

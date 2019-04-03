@@ -16,16 +16,17 @@ class CalendarEventModal extends React.Component {
   constructor() {
     super();
     this.state = {
-      startDate: moment(),
-      endDate: moment().add(1, 'day'),
+      name: '',
+      start: moment(),
+      end: moment().add(1, 'day'),
     };
   }
 
   render() {
     const {
-      handleSubmit, calendarEvent, open, closeModal,
+      saveCalendarEvent, calendarEvent, open, closeModal,
     } = this.props;
-    const { startDate, endDate } = this.state;
+    const { name, start, end } = this.state;
     return (
       <Dialog
         open={open}
@@ -42,6 +43,8 @@ class CalendarEventModal extends React.Component {
             label="Title"
             type="text"
             fullWidth
+            value={name}
+            onChange={e => this.setState({ name: e.target.value })}
           />
           <TextField
             autoFocus
@@ -53,8 +56,8 @@ class CalendarEventModal extends React.Component {
             InputLabelProps={{
               shrink: true,
             }}
-            onChange={e => this.setState({ startDate: moment(e.target.value) })}
-            value={startDate.format('YYYY-MM-DD')}
+            onChange={e => this.setState({ start: moment(e.target.value) })}
+            value={start.format('YYYY-MM-DD')}
           />
           <TextField
             autoFocus
@@ -66,13 +69,21 @@ class CalendarEventModal extends React.Component {
             InputLabelProps={{
               shrink: true,
             }}
-            onChange={e => this.setState({ endDate: moment(e.target.value) })}
-            value={endDate.format('YYYY-MM-DD')}
+            onChange={e => this.setState({ end: moment(e.target.value) })}
+            value={end.format('YYYY-MM-DD')}
           />
         </DialogContent>
         <DialogActions>
           <Button onClick={closeModal} color="primary">Cancel</Button>
-          <Button onClick={handleSubmit} color="primary">Save</Button>
+          <Button
+            onClick={() => {
+              saveCalendarEvent({ name, start, end });
+              closeModal();
+            }}
+            color="primary"
+          >
+            {'Save'}
+          </Button>
         </DialogActions>
       </Dialog>
     );
