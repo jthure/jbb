@@ -6,27 +6,55 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import FormControl from '@material-ui/core/FormControl';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
 import { withStyles } from '@material-ui/core/styles';
 import moment from 'moment';
 
 
-const styles = theme => ({});
+const styles = theme => ({
+  formControl: {
+    minWidth: 120,
+  },
+});
+
+const newEvent = () => ({
+  name: '',
+  start: moment(),
+  end: moment().add(1, 'day'),
+  status: '',
+});
 
 class CalendarEventModal extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      name: '',
-      start: moment(),
-      end: moment().add(1, 'day'),
-    };
+  constructor(props) {
+    super(props);
+    this.state = newEvent();
   }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if (nextProps.calendarEvent && nextProps.calendarEvent.id !== prevState.id) {
+      console.log(nextProps.calendarEvent);
+      return {
+        ...nextProps.calendarEvent,
+        start: moment(nextProps.calendarEvent.start),
+        end: moment(nextProps.calendarEvent.end),
+        status: nextProps.calendarEvent.calendar_event_status ? nextProps.calendarEvent.calendar_event_status.id : '',
+      };
+    }
+    return null;
+  }
+
 
   render() {
     const {
-      saveCalendarEvent, calendarEvent, open, closeModal,
+      calendarEvent, calendarEventStatuses, open,
+      closeModal, saveCalendarEvent, classes,
     } = this.props;
-    const { name, start, end } = this.state;
+    const {
+      name, start, end, status, id,
+    } = this.state;
     return (
       <Dialog
         open={open}
@@ -49,7 +77,7 @@ class CalendarEventModal extends React.Component {
           <TextField
             autoFocus
             margin="dense"
-            id="name"
+            id="start"
             label="Start date"
             type="date"
             fullWidth
@@ -62,7 +90,7 @@ class CalendarEventModal extends React.Component {
           <TextField
             autoFocus
             margin="dense"
-            id="name"
+            id="end"
             label="End date"
             type="date"
             fullWidth
@@ -72,12 +100,28 @@ class CalendarEventModal extends React.Component {
             onChange={e => this.setState({ end: moment(e.target.value) })}
             value={end.format('YYYY-MM-DD')}
           />
+          <FormControl className={classes.formControl}>
+            <InputLabel htmlFor="status">Status</InputLabel>
+            <Select
+              autoWidth
+              value={status}
+              onChange={e => this.setState({ status: e.target.value })}
+              inputProps={{
+                name: 'status',
+                id: 'status',
+              }}
+            >
+              {calendarEventStatuses.map(s => <MenuItem value={s.id}>{s.name}</MenuItem>)}
+            </Select>
+          </FormControl>
         </DialogContent>
         <DialogActions>
           <Button onClick={closeModal} color="primary">Cancel</Button>
           <Button
             onClick={() => {
-              saveCalendarEvent({ name, start, end });
+              saveCalendarEvent({
+                name, start, end, calendar_event_status_id: status, id,
+              });
               closeModal();
             }}
             color="primary"

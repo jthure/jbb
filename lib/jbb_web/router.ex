@@ -23,7 +23,7 @@ defmodule JBBWeb.Router do
   scope "/api", JBBWeb do
     pipe_through :api
     resources "/calendar_events", CalendarEventController
-    resources "/calendar_event_status", CalendarEventStatusController, only: [:index, :show]
+    resources "/calendar_event_statuses", CalendarEventStatusController, only: [:index, :show]
     resources "/users", UserController
   end
 end

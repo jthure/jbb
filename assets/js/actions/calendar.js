@@ -34,14 +34,37 @@ export const saveCalendarEvent = event => async (dispatch) => {
     console.log(event);
     const res = await api.saveCalendarEvent(event);
     const { data } = res.data;
-    data.title = data.name;
     dispatch({
       type: types.SAVE_CALENDAR_EVENT_SUCCESS,
-      payload: data,
+      payload: {
+        ...data,
+        title: event.name,
+        start: moment(event.start).toDate(),
+        end: moment(event.end).toDate(),
+      },
     });
   } catch (error) {
     dispatch({
       type: types.SAVE_CALENDAR_EVENT_FAIL,
+    });
+  }
+};
+
+export const fetchCalendarEventStatuses = () => async (dispatch) => {
+  dispatch({
+    type: types.FETCH_CALENDAR_EVENT_STATUSES,
+  });
+  try {
+    const res = await api.fetchCalendarEventStatuses();
+    const { data } = res.data;
+    dispatch({
+      type: types.FETCH_CALENDAR_EVENT_STATUSES_SUCCESS,
+      payload: data,
+    });
+  } catch (error) {
+    console.log(error);
+    dispatch({
+      type: types.FETCH_CALENDAR_EVENT_STATUSES_FAIL,
     });
   }
 };

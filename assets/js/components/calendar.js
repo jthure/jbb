@@ -25,6 +25,7 @@ const Calendar = ({ classes, calendarEvents, openCalendarModal }) => (
       events={calendarEvents}
       startAccessor="start"
       endAccessor="end"
+      onSelectEvent={(event) => { console.log(event); openCalendarModal(event); }}
       defaultDate={new Date()}
       defaultView="month"
       style={{ height: '70vh' }}

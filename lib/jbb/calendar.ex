@@ -37,6 +37,9 @@ defmodule JBB.Calendar do
   """
   def get_calendar_event_status!(id), do: Repo.get!(CalendarEventStatus, id)
 
+  def get_calendar_event_status_by_name!(name),
+    do: Repo.get_by!(CalendarEventStatuses, name: name)
+
   @doc """
   Creates a calendar_event_status.
 
@@ -147,9 +150,15 @@ defmodule JBB.Calendar do
 
   """
   def create_calendar_event(attrs \\ %{}) do
-    %CalendarEvent{}
-    |> CalendarEvent.changeset(attrs)
-    |> Repo.insert()
+    case %CalendarEvent{}
+         |> CalendarEvent.changeset(attrs)
+         |> Repo.insert() do
+      {:ok, %CalendarEvent{} = calendar_event} ->
+        {:ok, calendar_event |> Repo.preload(:calendar_event_status)}
+
+      error ->
+        error
+    end
   end
 
   @doc """
@@ -165,9 +174,15 @@ defmodule JBB.Calendar do
 
   """
   def update_calendar_event(%CalendarEvent{} = calendar_event, attrs) do
-    calendar_event
-    |> CalendarEvent.changeset(attrs)
-    |> Repo.update()
+    case calendar_event
+         |> CalendarEvent.changeset(attrs)
+         |> Repo.update() do
+      {:ok, %CalendarEvent{} = calendar_event} ->
+        {:ok, calendar_event |> Repo.preload(:calendar_event_status)}
+
+      error ->
+        error
+    end
   end
 
   @doc """
