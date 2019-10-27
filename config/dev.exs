@@ -72,4 +72,5 @@ config :jbb, JBB.Repo,
   password: "postgres",
   database: "jbb_dev",
   hostname: "localhost",
-  pool_size: 10
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
+
