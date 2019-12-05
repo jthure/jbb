@@ -6,9 +6,9 @@ defmodule JBB.AccountsTest do
   describe "users" do
     alias JBB.Accounts.User
 
-    @valid_attrs %{name: "some name", username: "some username"}
+    @valid_attrs %{name: "some name", username: "some username", password: "somepassword"}
     @update_attrs %{name: "some updated name", username: "some updated username"}
-    @invalid_attrs %{name: nil, username: nil}
+    @invalid_attrs %{name: nil, username: nil, password: nil}
 
     def user_fixture(attrs \\ %{}) do
       {:ok, user} =
@@ -31,6 +31,7 @@ defmodule JBB.AccountsTest do
 
     test "create_user/1 with valid data creates a user" do
       assert {:ok, %User{} = user} = Accounts.create_user(@valid_attrs)
+      assert {:ok, user} == Argon2.check_pass(user, "somepassword", hash_key: :password)
       assert user.name == "some name"
       assert user.username == "some username"
     end
@@ -42,6 +43,7 @@ defmodule JBB.AccountsTest do
     test "update_user/2 with valid data updates the user" do
       user = user_fixture()
       assert {:ok, %User{} = user} = Accounts.update_user(user, @update_attrs)
+      assert {:ok, user} == Argon2.check_pass(user, "somepassword", hash_key: :password)
       assert user.name == "some updated name"
       assert user.username == "some updated username"
     end
