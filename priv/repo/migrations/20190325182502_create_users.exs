@@ -5,6 +5,7 @@ defmodule JBB.Repo.Migrations.CreateUsers do
     create table(:users) do
       add :name, :string
       add :username, :string
+      add :password, :string
 
       timestamps()
     end

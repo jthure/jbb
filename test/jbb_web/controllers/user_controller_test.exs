@@ -6,11 +6,13 @@ defmodule JBBWeb.UserControllerTest do
 
   @create_attrs %{
     name: "some name",
-    username: "some username"
+    username: "some username",
+    password: "somepassword"
   }
   @update_attrs %{
     name: "some updated name",
-    username: "some updated username"
+    username: "some updated username",
+    password: "someupdatedpassword"
   }
   @invalid_attrs %{name: nil, username: nil}
 
