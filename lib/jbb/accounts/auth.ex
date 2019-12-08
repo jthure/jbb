@@ -1,5 +1,5 @@
 defmodule JBB.Accounts.Auth do
-  use Guardian, otp_app: :auth_me
+  use Guardian, otp_app: :jbb
 
   alias JBB.Accounts
 

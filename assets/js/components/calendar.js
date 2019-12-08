@@ -6,6 +6,11 @@ import AddIcon from '@material-ui/icons/Add';
 import { withStyles } from '@material-ui/core/styles';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
 
+moment.locale('se', {
+  week: {
+    dow: 1,
+  },
+});
 const localizer = BigCalendar.momentLocalizer(moment);
 
 const styles = theme => ({

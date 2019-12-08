@@ -1,6 +1,6 @@
 defmodule JBB.Accounts.Pipeline do
   use Guardian.Plug.Pipeline,
-    otp_app: :auth_me,
+    otp_app: :jbb,
     error_handler: JBB.Accounts.ErrorHandler,
     module: JBB.Accounts.Auth
 

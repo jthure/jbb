@@ -27,7 +27,7 @@ config :logger, :console,
 config :phoenix, :json_library, Jason
 
 config :jbb, JBB.Accounts.Auth,
-  issuer: "auth_me",
+  issuer: "jbb",
   secret_key: "yTUXabuSi6l4QYcP1a9x0+uig5m59dRxplvRIx2RKHRSfHwG4PUpgxSOJQxwD05W"
 
 # Import environment specific config. This must remain at the bottom

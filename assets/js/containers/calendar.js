@@ -5,11 +5,14 @@ import { openCalendarEventModal, closeCalendarEventModal } from '../actions/ui';
 import CalendarComponent from '../components/calendar';
 import CalendarEventModal from '../modals/calendar_event';
 
+import { login } from '../actions/auth';
+
 
 class Calendar extends React.Component {
   componentWillMount() {
     this.props.fetchCalendarEvents();
     this.props.fetchCalendarEventStatuses();
+    this.props.login('jthure', 'test');
   }
 
   render() {
@@ -48,6 +51,7 @@ const actionCreators = {
   fetchCalendarEventStatuses,
   openCalendarEventModal,
   closeCalendarEventModal,
+  login,
 };
 
 export default connect(mapStateToProps, actionCreators)(Calendar);

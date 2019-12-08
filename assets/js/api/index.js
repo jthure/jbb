@@ -15,3 +15,5 @@ export const saveCalendarEvent = (event) => {
 };
 
 export const fetchCalendarEventStatuses = () => axios.get(apiUrl('calendar_event_statuses'));
+
+export const login = (username, password) => axios.post(apiUrl('login'), { user: { username, password } });

@@ -25,17 +25,17 @@ defmodule JBBWeb.Router do
     pipe_through [:browser, :auth]
 
     get "/", PageController, :index
-
-    get "/login", SessionController, :new
-    post "/login", SessionController, :login
-    get "/logout", SessionController, :logout
   end
 
   # Other scopes may use custom stacks.
   scope "/api", JBBWeb do
-    pipe_through :api
+    pipe_through [:api]
     resources "/calendar_events", CalendarEventController
     resources "/calendar_event_statuses", CalendarEventStatusController, only: [:index, :show]
     resources "/users", UserController
+
+    get "/login", SessionController, :new
+    post "/login", SessionController, :login
+    get "/logout", SessionController, :logout
   end
 end
