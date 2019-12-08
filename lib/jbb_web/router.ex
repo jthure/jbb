@@ -10,6 +10,7 @@ defmodule JBBWeb.Router do
   end
 
   pipeline :api do
+    plug :fetch_session
     plug :accepts, ["json"]
   end
 
@@ -29,10 +30,14 @@ defmodule JBBWeb.Router do
 
   # Other scopes may use custom stacks.
   scope "/api", JBBWeb do
-    pipe_through [:api]
+    pipe_through [:api, :auth, :ensure_auth]
     resources "/calendar_events", CalendarEventController
     resources "/calendar_event_statuses", CalendarEventStatusController, only: [:index, :show]
     resources "/users", UserController
+  end
+
+  scope "/api", JBBWeb do
+    pipe_through [:api, :auth]
 
     get "/login", SessionController, :new
     post "/login", SessionController, :login

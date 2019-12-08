@@ -1,6 +1,6 @@
 import moment from 'moment';
 import types from '../constants';
-import * as api from '../api';
+import api from '../api';
 
 export const fetchCalendarEvents = () => async (dispatch) => {
   dispatch({

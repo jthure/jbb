@@ -3,6 +3,7 @@ defmodule JBB.Accounts.User do
   import Ecto.Changeset
 
   alias Argon2
+  @derive {Jason.Encoder, only: [:name, :username]}
 
   schema "users" do
     field :name, :string

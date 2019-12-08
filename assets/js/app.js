@@ -22,8 +22,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import configureStore from './store/configure_store';
 import '../css/app.css';
-import AppBar from './components/app_bar';
-import Calendar from './containers/calendar';
+import Base from './containers/base'
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 
@@ -32,8 +31,7 @@ const store = configureStore();
 const App = () => (
   <div>
     <CssBaseline />
-    <AppBar />
-    <Calendar />
+    <Base />
   </div>
 );
 

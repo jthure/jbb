@@ -16,7 +16,7 @@ const styles = theme => ({
   },
 });
 
-const JBBAppBar = ({ classes }) => (
+const JBBAppBar = ({ classes, loggedIn }) => (
   <div className={classes.root}>
     <AppBar position="static">
       <Toolbar>
@@ -24,7 +24,7 @@ const JBBAppBar = ({ classes }) => (
           <MenuIcon />
         </IconButton>
         <Typography variant="h6" color="inherit" className={classes.grow}>JBB</Typography>
-        <Button color="inherit">Login</Button>
+        <Button color="inherit">{loggedIn ? "Logout" : "Login"}</Button>
       </Toolbar>
     </AppBar>
   </div>

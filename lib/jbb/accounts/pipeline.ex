@@ -5,9 +5,14 @@ defmodule JBB.Accounts.Pipeline do
     module: JBB.Accounts.Auth
 
   # If there is a session token, restrict it to an access token and validate it
-  plug Guardian.Plug.VerifySession, claims: %{"typ" => "access"}
+  res = plug Guardian.Plug.VerifySession, claims: %{"typ" => "access"}
+  IO.puts(res)
+
   # If there is an authorization header, restrict it to an access token and validate it
-  plug Guardian.Plug.VerifyHeader, claims: %{"typ" => "access"}
+  res = plug Guardian.Plug.VerifyHeader, claims: %{"typ" => "access"}
+  IO.puts(res)
   # Load the user if either of the verifications worked
-  plug Guardian.Plug.LoadResource, allow_blank: true
+  res = plug Guardian.Plug.LoadResource, allow_blank: true
+  IO.puts(res)
+  IO.puts("End of pipeline")
 end

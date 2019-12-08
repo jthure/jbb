@@ -12,7 +12,7 @@ class Calendar extends React.Component {
   componentWillMount() {
     this.props.fetchCalendarEvents();
     this.props.fetchCalendarEventStatuses();
-    this.props.login('jthure', 'test');
+    // this.props.login('jthure', 'test');
   }
 
   render() {
