@@ -10,6 +10,8 @@ defmodule JBB.Application do
     children = [
       # Start the Ecto repository
       JBB.Repo,
+      # Start the PubSub system
+      {Phoenix.PubSub, name: JBB.PubSub},
       # Start the endpoint when the application starts
       JBBWeb.Endpoint
       # Starts a worker by calling: JBB.Worker.start_link(arg)

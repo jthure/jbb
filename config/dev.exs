@@ -68,9 +68,6 @@ config :phoenix, :plug_init_mode, :runtime
 
 # Configure your database
 config :jbb, JBB.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "jbb_dev",
-  hostname: "localhost",
-  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
-
+  show_sensitive_data_on_connection_error: true,
+  pool_size: 10,
+  url: "postgres://postgres:postgres@db/jbb_dev"

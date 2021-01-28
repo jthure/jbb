@@ -16,7 +16,8 @@ config :jbb, JBBWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "i/jRuKAene1pSgubHa7pcVgbALoYR1H8XOnKT4WvbIhBk8Kk4l7thC7NNlhwPpIy",
   render_errors: [view: JBBWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: JBB.PubSub, adapter: Phoenix.PubSub.PG2]
+  pubsub_server: JBB.PubSub,
+  live_view: [signing_salt: "JoRS9HTpgJmxK3GiJ/w2kwCF/1Lr2uaf"]
 
 # Configures Elixir's Logger
 config :logger, :console,
