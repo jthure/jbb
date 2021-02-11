@@ -1,0 +1,37 @@
+<h1>Show Calendar event</h1>
+
+<%= if @live_action in [:edit] do %>
+  <%= live_modal @socket, JBBWeb.CalendarEventLive.FormComponent,
+    id: @calendar_event.id,
+    title: @page_title,
+    action: @live_action,
+    calendar_event: @calendar_event,
+    return_to: Routes.calendar_event_show_path(@socket, :show, @calendar_event) %>
+<% end %>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @calendar_event.title %>
+  </li>
+
+  <li>
+    <strong>Start:</strong>
+    <%= @calendar_event.start %>
+  </li>
+
+  <li>
+    <strong>End:</strong>
+    <%= @calendar_event.end %>
+  </li>
+
+    <li>
+    <strong>Owner:</strong>
+    <%= @calendar_event.owner.full_name %>
+  </li>
+
+</ul>
+
+<span><%= live_patch "Edit", to: Routes.calendar_event_show_path(@socket, :edit, @calendar_event), class: "button" %></span>
+<span><%= live_redirect "Back", to: Routes.calendar_event_index_path(@socket, :index) %></span>

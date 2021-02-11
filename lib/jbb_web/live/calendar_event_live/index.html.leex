@@ -1,0 +1,40 @@
+<h1>Listing Calendar events</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, JBBWeb.CalendarEventLive.FormComponent,
+    id: @calendar_event.id || :new,
+    title: @page_title,
+    action: @live_action,
+    calendar_event: @calendar_event,
+    current_user: @current_user,
+    return_to: Routes.calendar_event_index_path(@socket, :index) %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Start</th>
+      <th>End</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="calendar_events">
+    <%= for calendar_event <- @calendar_events do %>
+      <tr id="calendar_event-<%= calendar_event.id %>">
+        <td><%= calendar_event.title %></td>
+        <td><%= calendar_event.start %></td>
+        <td><%= calendar_event.end %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.calendar_event_show_path(@socket, :show, calendar_event) %></span>
+          <span><%= live_patch "Edit", to: Routes.calendar_event_index_path(@socket, :edit, calendar_event) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: calendar_event.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Calendar event", to: Routes.calendar_event_index_path(@socket, :new) %></span>

@@ -1,0 +1,37 @@
+<h1>Listing Calendar event instance</h1>
+
+<%= if @live_action in [:new, :edit] do %>
+  <%= live_modal @socket, JBBWeb.CalendarEventInstanceLive.FormComponent,
+    id: @calendar_event_instance.id || :new,
+    title: @page_title,
+    action: @live_action,
+    calendar_event_instance: @calendar_event_instance,
+    return_to: Routes.calendar_event_instance_index_path(@socket, :index) %>
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Start</th>
+      <th>End</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody id="calendar_event_instance">
+    <%= for calendar_event_instance <- @calendar_event_instance_collection do %>
+      <tr id="calendar_event_instance-<%= calendar_event_instance.id %>">
+        <td><%= calendar_event_instance.start %></td>
+        <td><%= calendar_event_instance.end %></td>
+
+        <td>
+          <span><%= live_redirect "Show", to: Routes.calendar_event_instance_show_path(@socket, :show, calendar_event_instance) %></span>
+          <span><%= live_patch "Edit", to: Routes.calendar_event_instance_index_path(@socket, :edit, calendar_event_instance) %></span>
+          <span><%= link "Delete", to: "#", phx_click: "delete", phx_value_id: calendar_event_instance.id, data: [confirm: "Are you sure?"] %></span>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<span><%= live_patch "New Calendar event instance", to: Routes.calendar_event_instance_index_path(@socket, :new) %></span>

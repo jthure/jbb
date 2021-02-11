@@ -1,0 +1,21 @@
+<h2><%= @title %></h2>
+
+<%= f = form_for @changeset, "#",
+  id: "calendar_event_instance-form",
+  phx_target: @myself,
+  phx_change: "validate",
+  phx_submit: "save" %>
+
+  <%= label f, :start %>
+  <%= datetime_select f, :start %>
+  <%= error_tag f, :start %>
+
+  <%= label f, :end %>
+  <%= datetime_select f, :end %>
+  <%= error_tag f, :end %>
+
+  <%= label f, :calendar_event %>
+  <%= select f, :calendar_event_id, @calendar_events %>
+
+  <%= submit "Save", phx_disable_with: "Saving..." %>
+</form>
