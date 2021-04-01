@@ -15,20 +15,17 @@ defmodule JBBWeb.CalendarEventLive.Index do
 
   @impl true
   def handle_params(params, _url, socket) do
-    IO.inspect(socket)
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 
   defp apply_action(socket, :edit, %{"id" => id}) do
     x = Calendar.get_calendar_event!(id)
-    IO.inspect(x)
     socket
     |> assign(:page_title, "Edit Calendar event")
     |> assign(:calendar_event, Calendar.get_calendar_event!(id))
   end
 
   defp apply_action(socket, :new, _params) do
-    IO.inspect(socket)
     socket
     |> assign(:page_title, "New Calendar event")
     |> assign(:calendar_event, %CalendarEvent{})

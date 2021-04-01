@@ -4,7 +4,7 @@ defmodule JBBWeb.PageLive do
   alias JBB.Posts
   alias JBB.Posts.Post
 
-  @start_date "2021-02-07"
+  @start_date "2021-02-15"
 
   @impl true
   def mount(_params, _session, socket) do
@@ -30,9 +30,6 @@ defmodule JBBWeb.PageLive do
 
   @impl true
   def handle_params(params, url, socket) do
-    IO.inspect(url)
-    IO.inspect(socket)
-
     {:noreply,
      socket
      |> assign(:page_title, "New Post")

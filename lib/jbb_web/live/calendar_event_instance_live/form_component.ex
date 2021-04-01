@@ -8,7 +8,6 @@ defmodule JBBWeb.CalendarEventInstanceLive.FormComponent do
     changeset = Calendar.change_calendar_event_instance(calendar_event_instance)
     calendar_events = Calendar.list_calendar_events()
     |> Enum.map(fn c -> {c.title, c.id} end)
-    IO.inspect(calendar_events)
     {:ok,
      socket
      |> assign(assigns)

@@ -7,28 +7,37 @@
     </div>
   <% end %>
 
+  <div class="form-item-container">
   <%= label f, :first_name %>
   <%= text_input f, :first_name, required: true %>
   <%= error_tag f, :first_name %>
+  </div>
 
+  <div class="form-item-container">
   <%= label f, :last_name %>
   <%= text_input f, :last_name, required: true %>
   <%= error_tag f, :last_name %>
+  </div>
 
+  <div class="form-item-container">
   <%= label f, :email %>
   <%= email_input f, :email, required: true %>
   <%= error_tag f, :email %>
+  </div>
 
+  <div class="form-item-container">
   <%= label f, :password %>
   <%= password_input f, :password, required: true %>
   <%= error_tag f, :password %>
+  </div>
 
   <div>
-    <%= submit "Register" %>
+    <%= submit "Register", class: "btn btn-blue" %>
   </div>
 <% end %>
 
 <p>
-  <%= link "Log in", to: Routes.user_session_path(@conn, :new) %> |
+ <!-- <%= link "Log in", to: Routes.user_session_path(@conn, :new), class: "btn" %>
   <%= link "Forgot your password?", to: Routes.user_reset_password_path(@conn, :new) %>
+  -->
 </p>

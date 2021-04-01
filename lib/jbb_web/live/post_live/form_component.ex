@@ -32,7 +32,7 @@ defmodule JBBWeb.PostLive.FormComponent do
       {:ok, _post} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Post updated successfully")
+        #  |> put_flash(:info, "Post updated successfully")
          |> push_redirect(to: socket.assigns.return_to)}
 
       {:error, %Ecto.Changeset{} = changeset} ->
@@ -45,7 +45,7 @@ defmodule JBBWeb.PostLive.FormComponent do
       {:ok, _post} ->
         {:noreply,
          socket
-         |> put_flash(:info, "Post created successfully")
+        #  |> put_flash(:info, "Post created successfully")
          |> push_redirect(to: socket.assigns.return_to)
         }
 

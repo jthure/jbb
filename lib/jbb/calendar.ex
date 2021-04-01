@@ -158,8 +158,6 @@ defmodule JBB.Calendar do
   def create_calendar_event_instance(attrs \\ %{}) do
     c = %CalendarEventInstance{}
     |> CalendarEventInstance.changeset(attrs)
-    IO.inspect(c)
-    c
     |> Repo.insert()
   end
 
